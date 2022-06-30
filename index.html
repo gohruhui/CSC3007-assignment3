@@ -24,7 +24,8 @@
     <svg></svg>
     <div class="tooltip"></div>
     <svg></svg>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script src="http://d3js.org/d3.v7.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
@@ -166,9 +167,10 @@
           })
           .style("opacity", 0.8)
           //Mouseover
-          .on("mouseover", (event, d) => {
-            // console.log("check");
-            // console.log(d);
+          .on("mouseover", function (event, d) {
+            mouseOver.call(this);
+            console.log("check");
+            console.log(d);
             d3.select(".tooltip")
               .html(
                 "<p> Planning Area: " +
@@ -201,16 +203,57 @@
               .style("background", "#fff")
               .style("left", event.pageX + "px")
               .style("top", event.pageY + "px");
-            mouseOver.call(this);
-            d3.select(event.currentTarget).classed("selected", true);
           })
-          //Mouseout
-          .on("mouseleave", (event, d) => {
+          .on("mouseleave", function (event, d) {
             mouseLeave.call(this);
             d3.select(".tooltip").text("");
-
-            d3.select(event.currentTarget).classed("selected", false);
           });
+        // .on("mouseover", (event, d) => {
+        //   mouseOver.call(this);
+        // console.log("check");
+        // console.log(d);
+        // d3.select(".tooltip")
+        //   .html(
+        //     "<p> Planning Area: " +
+        //       d.properties["Planning Area Name"] +
+        //       "</p>" +
+        //       "<p>Subzone: " +
+        //       d.properties["Subzone Name"] +
+        //       "</p>" +
+        //       "<p> Population: " +
+        //       data[1]
+        //         .find(
+        //           (x) =>
+        //             x["Planning Area"].toUpperCase() ==
+        //               d.properties["Planning Area Name"].toUpperCase() &&
+        //             x["Subzone"].toUpperCase() ==
+        //               d.properties["Subzone Name"].toUpperCase()
+        //         )
+        //         ["Population"].toString() +
+        //       "</p>"
+        //   )
+        //   // .text(
+        //   //   "Planning Area Name: " +
+        //   //     d.properties.Name +
+        //   //     " Subzone Name: " +
+        //   //     d.properties["Subzone Name"] +
+        //   //     " Population: " +
+        //   //     d.population
+        //   // )
+        //   .style("position", "absolute")
+        //   .style("background", "#fff")
+        //   .style("left", event.pageX + "px")
+        //   .style("top", event.pageY + "px");
+
+        // d3.select(event.currentTarget).classed("selected", true);
+        // })
+        //Mouseout
+        // .on("mouseleave", (event, d) => {
+        //   mouseLeave.call(this);
+        // d3.select(".tooltip").text("");
+
+        // d3.select(event.currentTarget).classed("selected", false);
+        // });
       });
     </script>
   </body>
